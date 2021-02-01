@@ -19,7 +19,7 @@
 			<h1>Core Interpreter</h1>
 			<p>Enter your program in the input text area and data into the data text area and click "Run" to
 				run the programs and get its output. A sample program and data may be selected from the drop
-				 down tab to run as well</p>
+				 down tab to run as well.</p>
 			<label for="sampleProg"><b>Sample Programs:</b></label>
 			<br>
 			<select name="sampleProg">
