@@ -24,29 +24,46 @@ public class Scanner {
 		reader.close();
 	}
 
-//TODO: adapt to StringReader
+	/**
+	 * Takes in String data and converts it to integer data.
+	 * 
+	 * @param reader A StringReader loaded with the String data.
+	 * @throws Exception An exception to the formatting of the data.
+	 */
 	private void getData(StringReader reader) throws Exception {
 		StringBuilder dataBuilder = new StringBuilder();
-		while(reader.ready()){
-			char nextChar = (char) reader.read();
+		int nextChar = reader.read();
+		while(nextChar != -1){
 			if(Character.isDigit(nextChar) || nextChar == '-'){
-				dataBuilder.append(nextChar);
-				nextChar = (char) reader.read();
+				dataBuilder.append((char) nextChar);
+				int previousChar = nextChar;
+				nextChar = reader.read();
+				if(previousChar == '-' && !Character.isDigit(nextChar)) {
+					throw new Exception("Error: \'-\' should be immediately followed"
+							+ "by a number.");
+				}
 				while(Character.isDigit(nextChar)){
-					dataBuilder.append(nextChar);
-					nextChar = (char) reader.read();
+					dataBuilder.append((char) nextChar);
+					nextChar = reader.read();
 				}
 				data.add(Integer.parseInt(dataBuilder.toString()));
 				dataBuilder = new StringBuilder();
 			}
-			if(!Character.isWhitespace(nextChar) && reader.ready()){
+			if(!Character.isWhitespace(nextChar) && nextChar != -1){
 				throw new Exception("ERROR: Numbers should be sepparated with "
 						+ "spaces and negative number should begin with a \"-\".");
 			}
+			//Consume whitespace
+			nextChar = reader.read();
 		}
 	}
 
-	
+	/**
+	 * Creates tokens for the provided Core code.
+	 * 
+	 * @param reader  A StringReader loaded with the Core language code.
+	 * @throws Exception An exception to the formatting and syntax of the code.
+	 */
 	private void tokenizer(StringReader reader) throws Exception {
 		StringBuilder builder = new StringBuilder();
 		int nextChar =  reader.read();
@@ -91,6 +108,12 @@ public class Scanner {
 		}
 	}
 
+	/**
+	 * Retrieves the token matching the provided String.
+	 * 
+	 * @param progString
+	 * @return
+	 */
 	private String getToken(String progString){
 		String token;
 		if(tokenMap.containsKey(progString)){
@@ -104,6 +127,12 @@ public class Scanner {
 		}
 		return token;
 	}
+	
+	/**
+	 * Retrieves the next token.
+	 * 
+	 * @return a String token.
+	 */
 	public String nextToken(){
 		if(!tokens.isEmpty()){
 			currentTok = tokens.remove(0);
@@ -114,6 +143,13 @@ public class Scanner {
 		return currentTok;
 	}
 	
+	
+	/**
+	 * Retrieves the next data entry.
+	 * 
+	 * @return integer data.
+	 * @throws Exception Throws exception when no data is available.
+	 */
 	public int nextData() throws Exception{
 		if(data.isEmpty()){
 			throw new Exception("ERROR: No more data available.");
@@ -121,11 +157,20 @@ public class Scanner {
 		return data.remove(0);
 	}
 	
-	
+	/**
+	 * Provides the last token Retrieved from nextToken().
+	 * @return String token.
+	 */
 	public String currentToken(){
 		return currentTok;
 	}
 	
+	/**
+	 * Returns the same token that would be returned from nextToken() without
+	 * consuming the current token.
+	 * 
+	 * @return String token.
+	 */
 	public String peekNextToken(){
 		String peek;
 		if(tokens.isEmpty()){
@@ -136,6 +181,9 @@ public class Scanner {
 		return peek;
 	}
 	
+	/**
+	 * Initializes all the String-token pairings in the tokenMap.
+	 */
 	private void initialize() {
 		tokenMap.put("program", "PROGRAM");
 		tokenMap.put("begin", "BEGIN");
