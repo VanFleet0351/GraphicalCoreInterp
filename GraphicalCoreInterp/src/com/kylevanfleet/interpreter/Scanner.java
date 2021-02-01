@@ -103,7 +103,7 @@ public class Scanner {
 					lineCount++;
 				nextChar = reader.read();
 			}else{
-				throw new Exception("ERROR: unsupported character \"" + nextChar + "\" was found on line " + lineCount);
+				throw new Exception("ERROR: unsupported character \"" + (char) nextChar + "\" was found on line " + lineCount);
 			}
 		}
 	}

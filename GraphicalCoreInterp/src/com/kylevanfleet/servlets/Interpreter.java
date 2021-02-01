@@ -1,8 +1,6 @@
 package com.kylevanfleet.servlets;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -25,11 +23,9 @@ public class Interpreter extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("text/plain");
-		PrintWriter out = response.getWriter();
 		String prog = request.getParameter("prog").trim();
 		String data = request.getParameter("data").trim();
-		String prettyCode = "Error";
+		String prettyCode = prog;
 		String output = "Error";
 		
 		try {
@@ -38,7 +34,7 @@ public class Interpreter extends HttpServlet {
 			prettyCode = coreParser.printCode();
 			output = coreParser.execute();
 		} catch (Exception e) {
-			out.println(e.getMessage());
+			output = e.getMessage();
 			e.printStackTrace();
 		}
 		request.setAttribute("formattedCode", prettyCode);
