@@ -13,7 +13,7 @@ import com.kylevanfleet.service.SampleProgLoader;
 /**
  * Servlet implementation class ProgramLoaderServlet
  */
-@WebServlet("/ProgramLoaderServlet")
+@WebServlet(description = "ProgramLoaderServlet", urlPatterns = {"/ProgramLoaderServlet"})
 public class ProgramLoaderServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -22,10 +22,11 @@ public class ProgramLoaderServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String progToLoad = request.getParameter("sampleProg");
+		System.out.println(progToLoad);
 		SampleProgLoader spl = new SampleProgLoader();
 		String[] sampleProgAndData = spl.getPorg(progToLoad);
 		request.setAttribute("formattedCode", sampleProgAndData[0]);
-		request.setAttribute("output", sampleProgAndData[1]);
+		request.setAttribute("data", sampleProgAndData[1]);
 		RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
 		rd.forward(request, response);
 	}
