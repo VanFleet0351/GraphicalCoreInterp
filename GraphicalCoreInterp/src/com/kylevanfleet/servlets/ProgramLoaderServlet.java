@@ -22,7 +22,6 @@ public class ProgramLoaderServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String progToLoad = request.getParameter("sampleProg");
-		System.out.println(progToLoad);
 		SampleProgLoader spl = new SampleProgLoader();
 		String[] sampleProgAndData = spl.getPorg(progToLoad);
 		request.setAttribute("formattedCode", sampleProgAndData[0]);
