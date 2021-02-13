@@ -3,42 +3,42 @@
  */
 package com.kylevanfleet.service;
 
+import java.util.HashMap;
+
+import com.kylevanfleet.data.SampleProgramData;
+
 /**
  * @author Kyle Van Fleet
  *
  */
 public class SampleProgLoader {
-	//TODO: Add more sample programs
-	private static final String ADDER = "program\n  int x, y, z;\nbegin\n  input"
-			+ " x, y;\n  z:= x + y;\n  output z;\nend";
-	private static final String ADDER_DATA = "1 2";
-	private static final String LARGER = "program\r\n  int a,b,c;\r\nbegin\r\n" + 
-			"  input a,b;\r\n  if b<a then\r\n    c:=a;\r\n  else\r\n    c:=b;\r\n" + 
-			"  endif;\r\n  output c;\nend";
-	private static final String LARGER_DATA = "42 24";
+	private HashMap<String, String[]> samples;
 	
-	public String[] getPorg(String progToLoad) {
-		String prog;
-		String data;
-		
-		switch (progToLoad) {
-		case "adder":
-			prog = ADDER;
-			data = ADDER_DATA;
-			break;
-		case "larger":
-			prog = LARGER;
-			data = LARGER_DATA;
-			break;
-		default:
-			prog = "program\nbegin\nend";
-			data = "1 -2 3";
-			break;
+	
+	public SampleProgLoader() {
+		this.samples = new HashMap<>();
+		this.init();
 	}
-		String[] sample = {prog, data};
-		System.out.println(sample[0]);
-		System.out.println(sample[1]);
-		return sample;
+
+
+	private void init() {
+		samples.put("adder", 
+				new String[] {SampleProgramData.ADDER, SampleProgramData.ADDER_DATA});
+		samples.put("larger", 
+				new String[] {SampleProgramData.LARGER, SampleProgramData.LARGER_DATA});
+		samples.put("counter", 
+				new String[] {SampleProgramData.COUNTER, SampleProgramData.COUNTER_DATA});
+		samples.put("switch", 
+				new String[] {SampleProgramData.SWITCH, SampleProgramData.SWITCH_DATA});
+		samples.put("fibo", 
+				new String[] {SampleProgramData.FIBO, SampleProgramData.FIBO_DATA});
+	}
+
+
+
+
+	public String[] getProg(String progToLoad) {
+		return samples.get(progToLoad);
 	}
 
 }
