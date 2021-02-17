@@ -23,9 +23,7 @@ public class ProgramLoaderServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String progToLoad = request.getParameter("sampleProg");
 		SampleProgLoader spl = new SampleProgLoader();
-		String[] sampleProgAndData = spl.getProg(progToLoad);
-		request.setAttribute("formattedCode", sampleProgAndData[0]);
-		request.setAttribute("data", sampleProgAndData[1]);
+		request.setAttribute("sampleProg", spl.getProg(progToLoad));
 		RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
 		rd.forward(request, response);
 	}

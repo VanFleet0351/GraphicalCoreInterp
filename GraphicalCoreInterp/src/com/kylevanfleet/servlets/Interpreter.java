@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kylevanfleet.data.FormattedOutput;
 import com.kylevanfleet.interpreter.Parser;
 import com.kylevanfleet.interpreter.Scanner;
 
@@ -37,9 +38,9 @@ public class Interpreter extends HttpServlet {
 			output = e.getMessage();
 			e.printStackTrace();
 		}
-		request.setAttribute("formattedCode", prettyCode);
-		request.setAttribute("output", output);
-		request.setAttribute("data", data);
+		System.out.println(prettyCode);
+		FormattedOutput formattedOutput = new FormattedOutput(prettyCode, data, output);
+		request.setAttribute("output", formattedOutput);
 		RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
 		rd.forward(request, response);
 	}

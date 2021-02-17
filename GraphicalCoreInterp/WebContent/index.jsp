@@ -7,10 +7,6 @@
 <title>Core Interpreter</title>
 </head>
 <body>
-	<%!
-		String prog = "";
-		String data = "";
-	%>
 
 
 	<header>
@@ -53,7 +49,6 @@
 	<form method="post" action="ProgramLoaderServlet">
 		<section>
 			<label for="sampleProg"><b>Sample Programs:</b></label> <br>
-			<!-- Add more options -->
 			<select name="sampleProg" id="sampleProg">
 				<option value="adder">Adder</option>
 				<option value="larger">Larger</option>
@@ -65,36 +60,35 @@
 	</form>
 	<form method="post" action="Interpreter">
 		<section>
+		<jsp:useBean id="sampleProg" class="com.kylevanfleet.data.SampleProgram" scope="request">
+			<jsp:setProperty property="prog" name="sampleProg" value=""/>
+			<jsp:setProperty property="data" name="sampleProg" value=""/>
+		</jsp:useBean>
 			<label for="prog"><b>Program:</b></label> <br>
-			<%
-				if (request.getAttribute("formattedCode") != null) {
-					prog = (String) request.getAttribute("formattedCode");
-				}
-			%>
-			<textarea rows="10" cols="25" id="prog" name="prog"><%=prog%></textarea>
+			<textarea rows="10" cols="25" id="prog" name="prog"><jsp:getProperty property="prog" name="sampleProg"/></textarea>
 			<br> <br> <label for="data"><b>Input Data:</b></label> <br>
-			<%
-				if (request.getAttribute("data") != null) {
-					data = (String) request.getAttribute("data");
-				}
-			%>
-
-			<textarea rows="3" cols="25" id="data" name="data"><%=data%></textarea>
+			<textarea rows="3" cols="25" id="data" name="data"><jsp:getProperty property="data" name="sampleProg"/></textarea>
 			<br> <br> <input type="submit" value="Run">
 		</Section>
 	</form>
-	<hr>
+	<br>
+	<br>
 	<section>
-		<p>
-			<b>Output:</b>
-		</p>
-		<%
-			if (request.getAttribute("output") != null) {
-		%>
-		<p><%=request.getAttribute("output")%></p>
-		<%
-			}
-		%>
+	<jsp:useBean id="output" class="com.kylevanfleet.data.FormattedOutput" scope="request">
+		<jsp:setProperty property="prettyCode" name="output" value=""/>
+		<jsp:setProperty property="inData" name="output" value=""/>
+		<jsp:setProperty property="outData" name="output" value=""/>
+	</jsp:useBean>
+		<h2>Output:</h2>
+		<hr>
+		<h5>Input Code:</h5>
+		<pre><code><jsp:getProperty property="prettyCode" name="output"/></code></pre>
+		<hr>
+		<h5>Input Data:</h5>
+		<jsp:getProperty property="inData" name="output"/>
+		<hr>
+		<h5>Output Data:</h5>
+		<jsp:getProperty property="outData" name="output"/>
 	</section>
 	</main>
 	<hr>

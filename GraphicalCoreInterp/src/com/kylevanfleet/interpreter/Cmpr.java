@@ -43,7 +43,7 @@ public class Cmpr implements CoreToken {
 			builder.append("=");
 			break;
 		case LT:
-			builder.append("<");
+			builder.append("&lt;");
 			break;
 		case LTE:
 			builder.append("<=");
