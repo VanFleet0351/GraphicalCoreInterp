@@ -67,7 +67,7 @@
 			<label for="prog"><b>Program:</b></label> <br>
 			<textarea rows="15" cols="40" id="prog" name="prog"><jsp:getProperty property="prog" name="sampleProg"/></textarea>
 			<br> <br> <label for="data"><b>Input Data:</b></label> <br>
-			<textarea rows="3" cols="40" id="data" name="data"><jsp:getProperty property="data" name="sampleProg"/></textarea>
+			<textarea rows="5" cols="40" id="data" name="data"><jsp:getProperty property="data" name="sampleProg"/></textarea>
 			<br> <br> <input type="submit" value="Run">
 		</Section>
 	</form>
