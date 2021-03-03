@@ -13,7 +13,7 @@ The interface for this project was created using JSPs and java servlets and the 
 The program and data inputs are passed to the **Scanner**, where the lexical analysis is performed, the inputs are read character by character to create a queue of tokens. The Scanner is then passed to the **Parser**, where the syntax analysis is performed. The parser creates a parse tree of the program from the stream of tokens provided by the scanner. The program can then be executed to receive program output to the screen and a formatted version of the program with properspacing and indention is printed to the screen. During execution, program variables are stored and retrieved from a hashtable at runtime to maintain constant time performance.
 
 ![Input](img/GCI-01.JPG)
-![Output](img/GCI-92.JPG)
+![Output](img/GCI-02.JPG)
 
 Core: A Toy Imperative Language
 ```
