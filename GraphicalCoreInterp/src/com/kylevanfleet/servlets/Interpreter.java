@@ -38,7 +38,7 @@ public class Interpreter extends HttpServlet {
 			output = e.getMessage();
 			e.printStackTrace();
 		}
-		System.out.println(prettyCode);
+		//System.out.println(prettyCode);
 		FormattedOutput formattedOutput = new FormattedOutput(prettyCode, data, output);
 		request.setAttribute("output", formattedOutput);
 		RequestDispatcher rd = request.getRequestDispatcher("index.jsp");

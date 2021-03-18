@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
+<link rel="stylesheet" href="style.css" type="text/css">
 <title>Core Interpreter</title>
 </head>
 <body>
@@ -22,7 +23,7 @@
 		performed with the following syntax "input x;" or "input x, y, z;" may be used for multiple
 		input requests.</p>
 		<h3>Language Grammar</h3>
-		<pre><code>
+		<div class="grammar"><pre><code>
 &lt;prog&gt; ::= program &lt;decl-seq&gt; begin &lt;stmt-seq&gt; end
 &lt;decl-seq&gt; ::= &lt;decl&gt; | &lt;decl&gt;&lt;decl-seq&gt;
 &lt;stmt-seq&gt; ::= &lt;stmt&gt; | &lt;stmt&gt;&lt;stmt-seq&gt;
@@ -41,7 +42,7 @@
 &lt;factor&gt; ::= const | id | ( &lt;expr&gt; )
 &lt;id&gt; ::= &lt;letter&gt; | &lt;id&gt;&lt;letter&gt; | &lt;id&gt;&lt;digit&gt;
 &lt;letter&gt; ::= A | B |...| Z | a | b | ... | z
-    	</code></pre>
+    	</code></pre></div>
 		
 
 	</header>
@@ -55,7 +56,7 @@
 				<option value="counter">Counter</option>
 				<option value="switch">Switch Statement</option>
 				<option value="fibo">Fibonacci</option>
-			</select> <input type="submit" value="Load"> <br> <br>
+			</select> <input type="submit" value="Load" class="button"> <br> <br>
 		</section>
 	</form>
 	<form method="post" action="Interpreter">
@@ -64,11 +65,16 @@
 			<jsp:setProperty property="prog" name="sampleProg" value=""/>
 			<jsp:setProperty property="data" name="sampleProg" value=""/>
 		</jsp:useBean>
-			<label for="prog"><b>Program:</b></label> <br>
-			<textarea rows="15" cols="40" id="prog" name="prog"><jsp:getProperty property="prog" name="sampleProg"/></textarea>
-			<br> <br> <label for="data"><b>Input Data:</b></label> <br>
-			<textarea rows="5" cols="40" id="data" name="data"><jsp:getProperty property="data" name="sampleProg"/></textarea>
-			<br> <br> <input type="submit" value="Run">
+			<div class="text-inputs">
+				<label for="prog"><b>Program:</b></label> <br>
+				<textarea rows="15" cols="40" id="prog" name="prog"><jsp:getProperty property="prog" name="sampleProg"/></textarea>
+			</div>
+			<div class="text-inputs">
+				<label for="data"><b>Input Data:</b></label> <br>
+				<textarea rows="5" cols="40" id="data" name="data"><jsp:getProperty property="data" name="sampleProg"/></textarea>
+			</div>
+			<br> <br> 
+			<input type="submit" value="Run" class="button">
 		</Section>
 	</form>
 	<br>
