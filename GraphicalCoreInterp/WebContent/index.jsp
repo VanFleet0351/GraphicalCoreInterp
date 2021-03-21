@@ -8,8 +8,6 @@
 <title>Core Interpreter</title>
 </head>
 <body>
-
-
 	<header>
 		<h1>Core Interpreter</h1>
 		<p>To create a program start with the key word "program" followed by a declaration of all
@@ -22,31 +20,171 @@
 		input, -10 will be assigned to the next request and so on. An input request can be 
 		performed with the following syntax "input x;" or "input x, y, z;" may be used for multiple
 		input requests.</p>
+		</header>
+		<main>
 		<h3>Language Grammar</h3>
-		<div class="grammar"><pre><code>
-&lt;prog&gt; ::= program &lt;decl-seq&gt; begin &lt;stmt-seq&gt; end
-&lt;decl-seq&gt; ::= &lt;decl&gt; | &lt;decl&gt;&lt;decl-seq&gt;
-&lt;stmt-seq&gt; ::= &lt;stmt&gt; | &lt;stmt&gt;&lt;stmt-seq&gt;
-&lt;decl&gt; ::= int &lt;id-list&gt; ; 
-&lt;id-list&gt; ::= id | id , &lt;id-list&gt; 
-&lt;stmt&gt; ::= &lt;assign&gt; | &lt;if&gt; | &lt;loop&gt; | &lt;in&gt; | &lt;out&gt; 
-&lt;assign&gt; ::= id := &lt;expr&gt; ;
-&lt;in&gt; ::= input id ; 
-&lt;out&gt; ::= output &lt;expr&gt; ; 
-&lt;if&gt; ::= if &lt;cond&gt; then &lt;stmt-seq&gt; endif ; | if &lt;cond&gt; then &lt;stmt-seq&gt; else &lt;stmt-seq&gt; endif ;
-&lt;loop&gt; ::= while &lt;cond&gt; begin &lt;stmt-seq&gt; endwhile ; 
-&lt;cond&gt; ::= &lt;cmpr&gt; | ! ( &lt;cond&gt; ) | &lt;cmpr&gt; or &lt;cond&gt;
-&lt;cmpr&gt; ::= &lt;expr&gt; = &lt;expr&gt; | &lt;expr&gt; &lt; &lt;expr&gt; | &lt;expr&gt; &lt;= &lt;expr&gt;
-&lt;expr&gt; ::= &lt;term&gt; | &lt;term&gt; + &lt;expr&gt; | &lt;term&gt; - &lt;expr&gt;
-&lt;term&gt; ::= &lt;factor&gt; | &lt;factor&gt; * &lt;term&gt;
-&lt;factor&gt; ::= const | id | ( &lt;expr&gt; )
-&lt;id&gt; ::= &lt;letter&gt; | &lt;id&gt;&lt;letter&gt; | &lt;id&gt;&lt;digit&gt;
-&lt;letter&gt; ::= A | B |...| Z | a | b | ... | z
-    	</code></pre></div>
+		<section class="grammar">
+		<span>
+			<span class="lhs">&lt;prog&gt;</span> ::= 
+			<span class="terminal">program</span> 
+			<span class="non-terminal">&lt;decl-seq&gt;</span> 
+			<span class="terminal">begin</span> 
+			<span class="non-terminal">&lt;stmt-seq&gt;</span> 
+			<span class="terminal">end</span>
+		</span>
+		<br>
+		<span>
+			<span class="lhs">&lt;decl-seq&gt;</span> ::= 
+			<span class="non-terminal">&lt;decl&gt;</span> | 
+			<span class="non-terminal">&lt;decl&gt;&lt;decl-seq&gt;</span>
+		</span>
+		<br>
+		<span>
+			<span class="lhs">&lt;stmt-seq&gt;</span> ::= 
+			<span class="non-terminal">&lt;stmt&gt;</span> | 
+			<span class="non-terminal">&lt;stmt&gt;&lt;stmt-seq&gt;</span>
+		</span>
+		<br>
+		<span>
+			<span class="lhs">&lt;decl&gt;</span> ::= 
+			<span class="terminal">int </span>
+			<span class="non-terminal">&lt;id-list&gt; </span>
+			<span class="terminal">; </span>
+		</span>
+		<br>
+		<span>
+			<span class="lhs">&lt;id-list&gt;</span> ::= 
+			<span class="terminal">id</span> | 
+			<span class="terminal">id</span> , 
+			<span class="non-terminal">&lt;id-list&gt;</span>
+		</span>
+		<br>
+ 		<span>
+ 			<span class="lhs">&lt;stmt&gt;</span> ::= 
+ 			<span class="non-terminal">&lt;assign&gt;</span> | 
+ 			<span class="non-terminal">&lt;if&gt;</span> | 
+ 			<span class="non-terminal">&lt;loop&gt;</span> | 
+ 			<span class="non-terminal">&lt;in&gt;</span> | 
+ 			<span class="non-terminal">&lt;out&gt;</span> 
+ 			
+ 		</span>
+ 		<br>
+ 		<span>
+ 			<span class="lhs">&lt;assign&gt;</span> ::= 
+ 			<span class="terminal">id</span> 
+ 			<span class="terminal">:=</span> 
+ 			<span class="non-terminal">&lt;expr&gt;</span> 
+ 			<span class="terminal">;</span>
+ 		</span>
+ 		<br>
+		<span>
+			<span class="lhs">&lt;in&gt;</span> ::=  
+			<span class="terminal">input </span>
+			<span class="terminal">id </span>
+			<span class="terminal">; </span>
+		</span>
+		<br>
+		<span>
+			<span class="lhs">&lt;out&gt;</span> ::= 
+			<span class="terminal">output </span>
+			<span class="non-terminal">&lt;expr&gt; </span>
+			<span class="terminal">; </span>
+		</span>
+		<br>
+		<span>
+			<span class="lhs">&lt;if&gt;</span> ::= 
+			<span class="terminal">if </span>
+			<span class="non-terminal">&lt;cond&gt; </span>
+			<span class="terminal">then </span>
+			<span class="non-terminal">&lt;stmt-seq&gt; </span>
+			<span class="terminal">endif </span><span class="terminal">; </span> | 
+			<span class="terminal">if </span><span class="non-terminal">&lt;cond&gt; </span>
+			<span class="terminal">then </span><span class="non-terminal">&lt;stmt-seq&gt; </span>
+			<span class="terminal">else </span><span class="non-terminal">&lt;stmt-seq&gt; </span>
+			<span class="terminal">endif </span><span class="terminal">; </span>
+		</span>
+		<br>
+		<span>
+			<span class="lhs">&lt;loop&gt;</span> ::= 
+			<span class="terminal">while</span>
+			<span class="non-terminal">&lt;cond&gt; </span>
+			<span class="terminal">begin </span>
+			<span class="non-terminal">&lt;stmt-seq&gt; </span>
+			<span class="terminal">endwhile </span>
+			<span class="terminal">; </span> 
+		</span>
+		<br>
+		<span>
+			<span class="lhs">&lt;cond&gt;</span> ::= 
+			<span class="non-terminal">&lt;cmpr&gt; </span>| 
+			<span class="terminal">! 
+			</span><span class="terminal">( </span>
+			<span class="non-terminal">&lt;cond&gt; </span>
+			<span class="terminal">) </span>| 
+			<span class="non-terminal">&lt;cmpr&gt; </span>
+			<span class="terminal">or </span>
+			<span class="non-terminal">&lt;cond&gt; </span>
+		</span>
+		<br>
+		<span>
+			<span class="lhs">&lt;cmpr&gt;</span> ::= 
+			<span class="non-terminal">&lt;expr&gt; </span>
+			<span class="terminal">= </span>
+			<span class="non-terminal">&lt;expr&gt; </span>| 
+			<span class="non-terminal">&lt;expr&gt; </span>
+			<span class="terminal">&lt; </span>
+			<span class="non-terminal">&lt;expr&gt; </span>| 
+			<span class="non-terminal">&lt;expr&gt; </span>
+			<span class="terminal">&lt;= </span>
+			<span class="non-terminal">&lt;expr&gt; </span>
+		</span>
+		<br>
+		<span>
+			<span class="lhs">&lt;expr&gt;</span> ::= 
+			<span class="non-terminal">&lt;term&gt; </span>| 
+			<span class="non-terminal">&lt;term&gt; </span>
+			<span class="terminal">+ </span>
+			<span class="non-terminal">&lt;expr&gt; </span>| 
+			<span class="non-terminal">&lt;term&gt; </span>
+			<span class="terminal">- </span>
+			<span class="non-terminal">&lt;expr&gt; </span>
+		</span>
+		<br>
+		<span>
+			<span class="lhs">&lt;term&gt;</span> ::= 
+			<span class="non-terminal">&lt;factor&gt; </span>| 
+			<span class="non-terminal">&lt;factor&gt; </span>
+			<span class="terminal">* </span>
+			<span class="non-terminal">&lt;term&gt; </span>
+		</span>
+		<br>
+		<span>
+			<span class="lhs">&lt;factor&gt;</span> ::= 
+			<span class="terminal">const </span>| 
+			<span class="terminal">id </span>| 
+			<span class="terminal">( </span>
+			<span class="non-terminal">&lt;expr&gt; </span>
+			<span class="terminal">) </span>
+		</span>
+		<br>
+		<span>
+			<span class="lhs">&lt;id&gt;</span> ::= 
+			<span class="non-terminal">&lt;letter&gt; </span>| 
+			<span class="non-terminal">&lt;id&gt;&lt;letter&gt; </span>| 
+			<span class="non-terminal">&lt;id&gt;&lt;digit&gt; </span>
+		</span>
+		<br>
+		<span>
+			<span class="lhs">&lt;letter&gt;</span> ::= 
+			<span class="terminal">A </span>| 
+			<span class="terminal">B </span>|...|
+			<span class="terminal">Z </span>| 
+			<span class="terminal">a </span>| 
+			<span class="terminal">b </span>|...| 
+			<span class="terminal">z </span>
+		</span>
+    	</section>
 		
-
-	</header>
-	<main>
 	<form method="post" action="ProgramLoaderServlet">
 		<section>
 			<label for="sampleProg"><b>Sample Programs:</b></label> <br>
